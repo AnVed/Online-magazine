@@ -23,7 +23,22 @@
 				</div>
 				<div class="col-md-4" id="gift">
 					<h4>{{item.title}}<br><b>{{item.price}}P</b></h4>
-					<p>Количество: 1 <a href="#" class="addtocart"> <button id="item{{ item.id }}" class="add">Добавить в корзину <img class="cart_add1" src="http://cs604529.vk.me/v604529635/1d0b/MStjkg_iHqI.jpg"></button></a></p>
+					<p>Количество: 1 <a href="#" class="addtocart"> <button id="item{{ item.id }}" class="add">
+									<script>
+									$(document).ready(function(){
+  									$( "button.add" ).click(function(){
+   									 var current_button = $(this);
+    								$.ajax({
+        							url: "/add-to-cart/",
+       								 type: "GET",
+        							data: {"item": $(this).attr('id')},
+        							success: function(data){
+          							current_button.replaceWith( data );
+        							}
+    								});
+   									});
+									});
+								</script>В корзину</button></a></p>
 					<p></p>
 					<p class=rightgreen>
 						<i>+ Товар есть в наличии<i>

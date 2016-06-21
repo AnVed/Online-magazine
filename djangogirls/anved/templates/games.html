@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+	
 	{% block content %}	
 			<div class="row">
 				<div class="col-md-12" class="shoplist">
@@ -22,7 +22,22 @@
 									{{ item.title }}
 								</dd>
 								<dt>
-									{{ item.price }}P <button id="item{{ item.id }}" class="add"><img class="cart_add" src="http://cs604529.vk.me/v604529635/1d0b/MStjkg_iHqI.jpg"></button>
+									{{ item.price }}P <button id="item{{ item.id }}" class="add">
+									<script>
+									$(document).ready(function(){
+  									$( "button.add" ).click(function(){
+   									 var current_button = $(this);
+    								$.ajax({
+        							url: "/add-to-cart/",
+       								 type: "GET",
+        							data: {"item": $(this).attr('id')},
+        							success: function(data){
+          							current_button.replaceWith( data );
+        							}
+    								});
+   									});
+									});
+								</script>В корзину</button>
 								</dt>
 							</dl>
 						</div></a>
@@ -31,18 +46,4 @@
 			</div>
 	{% endblock %}
 
-	<script>
-$(document).ready(function(){
-  $( "button.add" ).click(function(){
-    var current_button = $(this);
-    $.ajax({
-        url: "/add-to-cart/",
-        type: "GET",
-        data: {"item": $(this).attr('id')},
-        success: function(data){
-          current_button.replaceWith( data );
-        }
-    });
-   });
-});
-</script>
+	
