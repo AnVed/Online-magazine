@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+	{% block content %}
+			<div class="row" id="gift">
+				<ul class="breadcrumb">
+						<li>
+							<a href="#">Главная</a> <span class="divider">/</span>
+						</li>
+						<li class="active">
+							Корзина
+						</li>
+					</ul>
+				<div class="col-md-5">
+					<p>
+						Товар
+					</p>
+				</div>
+				<div class="col-md-2">
+					<p>
+						Цена
+					</p>
+				</div>
+				<div class="col-md-1">
+					<p>
+						Количество
+					</p>
+				</div>
+				<div class="col-md-2">
+					<p>
+						Сумма
+					</p>
+				</div>
+			</div>
+			<div class="row" id="gift">
+				<div class="col-md-2">
+					<img class="imgsmall" src="http://m.toy.ru/upload/resize_cache/iblock/d2d/500_500_10240811ca8906714d1a9f41f2f5b358d/635459f5_5e2b_11e2_8fb8_002655824cb6.jpeg" />
+				</div>
+				<div class="col-md-3">
+					<p>
+						<a href="#" class="addtocart1">Aurora 11-415 Аврора Медведь, 80 см</a>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<p>
+						3 999Р
+					</p>
+				</div>
+				<div class="col-md-1">
+					<p>
+						<input type="text" class="qty1" placeholder="1"/>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<p>
+						3 999Р
+					</p>
+				</div>
+				<div class="col-md-2">
+						<a class="btn btn-primary" href="#">УДАЛИТЬ</a>
+				</div>
+			</div>
+			<div class="row" id="gift">
+			<div class="col-md-9">
+				</div>
+			<div class="col-md-3" id="right">
+					<p>
+						Сумма: Такая-то
+						</p>
+					<a class="btn btn-primary" href="#">ОФОРМИТЬ ЗАКАЗ</a>
+				</div>
+			</div>
+			</div>
+	{% endblock %}

@@ -2,6 +2,19 @@ body {
  background-color: #eee;
 }
 
+#margin-right{
+  margin-right: 20px;
+}
+
+#margin-top {
+  margin-top: 60px;
+}
+
+.padding {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
 .left-img {
     height: 80px;
     margin-top: -15px;
@@ -233,6 +246,8 @@ border-radius: 0 3px 3px 0;
   text-align: center;
   margin-left: 10px;
   max-width: 320px;
+  margin-bottom: 15px;
+  height: 195px;
 }
 
 dl dd {
