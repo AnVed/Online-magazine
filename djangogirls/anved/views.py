@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
+from paypal.standard.forms import PayPalPaymentsForm
 
 # Create your views here.
 
@@ -18,28 +19,24 @@ all_items = [
 	{'id': 8, 'title': 'Aurora 21-611 Аврора Медведь белый сидячий, 74', 'price':  2349, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет', 'более 12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['soft_toys'], 'describe': 'Игрушка изготовлена из экологически чистых материалов: высококачественного плюшa и гипoaллepгeнного cинтепoна. Не деформируется и не теряет внешний вид при машинной стирке.', 'more': 'Бренд : Aurora. Артикул : 21-611. Размер упаковки: 0.74 х 0.26 х 0.35 м. Вес : 1.62 кг', 'img': 'http://m.toy.ru/upload/resize_cache/iblock/4ae/873_540_10240811ca8906714d1a9f41f2f5b358d/e54faf62_6b67_11e2_8fb8_002655824cb4.jpeg'},
 	{'id': 9, 'title': 'Aurora 30-349 Аврора Медведь коричневый 69 см', 'price': 2949, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет', 'более 12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['soft_toys'], 'describe': 'Классический медведь коричневого цвета. Игрушка изготовлена из экологически чистых материалов: высококачественного плюшa и гипoaллepгeнного cинтепoна. Не деформируется и не теряет внешний вид при машинной стирке.', 'more': 'Бренд : Aurora. Артикул : 30-349. Размер упаковки: 0.5 х 0.38 х 0.26 м. Вес : 1.16 кг', 'img': 'http://m.toy.ru/upload/resize_cache/iblock/f8b/500_500_10240811ca8906714d1a9f41f2f5b358d/7690bcdf_74f7_11e2_8fb8_002655824cb4.jpeg'},
 	{'id': 10, 'title': 'PLAY-DOH 37366 Набор "Мистер Зубастик" Новая Версия', 'price': 1239, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['games'], 'describe': 'Не секрет, что многие дети, а порой даже и взрослые, относятся к посещению стоматолога с большой опаской. С помощью этого своеобразного и очень интересного игрового набора ребёнок сможет не только проявить свои творческие способности и скульптурные таланты, занимаясь лепкой из пластилиновой массы, но и в простой увлекательной игровой форме познакомиться с основными принципами работы зубного врача, а также понять важность регулярного и правильного ухода за зубками.', 'more': 'Бренд : PLAY-DOH. Артикул : 37366. Размер упаковки: 0.087 х 0.257 х 0.229 м. Вес : 0.84 кг', 'img': 'http://www.toy.ru/upload/iblock/3a2/4bec74ac_6131_11e5_a105_00155d093116.jpeg'},
-	{'id': 11, 'title': 'Сквуши Набор для творчества "Мороженое" - масса для лепки и аксессуары', 'price': 1219, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['games'], 'describe': 'Вкусное, сладкое, ароматное…Ммм…Мороженое! Теперь его можно сделать самостоятельно и украсить на свой вкус. С набором для творчества Сквуши Ваш ребенок создаст множество разнообразных десертов и лакомств. Можно создавать классические молочные шарики с разными вкусами или заняться изготовлением фруктового льда. Эскимо или замороженные пирожные? Количество вариантов не ограничено! Яркие цвета и приятный состав Сквуши сделают игру очень увлекательной и интересной.', 'more': 'Бренд : Skwooshi. Артикул : S30024. Размер упаковки: 0.23 х 0.09 х 0.23 м. Вес : 0.542 кг', 'img': 'http://m.toy.ru/upload/resize_cache/iblock/1f6/873_540_10240811ca8906714d1a9f41f2f5b358d/daca31e4_be9e_11e5_84ee_00155d093116.jpeg'},
+	{'id': 11, 'title': 'Сквуши Набор для творчества "Мороженое"', 'price': 1219, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['games'], 'describe': 'Вкусное, сладкое, ароматное…Ммм…Мороженое! Теперь его можно сделать самостоятельно и украсить на свой вкус. С набором для творчества Сквуши Ваш ребенок создаст множество разнообразных десертов и лакомств. Можно создавать классические молочные шарики с разными вкусами или заняться изготовлением фруктового льда. Эскимо или замороженные пирожные? Количество вариантов не ограничено! Яркие цвета и приятный состав Сквуши сделают игру очень увлекательной и интересной.', 'more': 'Бренд : Skwooshi. Артикул : S30024. Размер упаковки: 0.23 х 0.09 х 0.23 м. Вес : 0.542 кг', 'img': 'http://m.toy.ru/upload/resize_cache/iblock/a00/873_540_10240811ca8906714d1a9f41f2f5b358d/688ae386_be9d_11e5_84ee_00155d093116.jpeg'},
 	{'id': 12, 'title': 'PLAY-DOH B0307 Игровой набор "Магазинчик печенья"', 'price': 629, 'ages': ['1-3 года', '4-5 лет', '6-8 лет', '9-12 лет'], 'sex': ['для мальчиков', 'для девочек'], 'category': ['games'], 'describe': 'Яркий и занимательный игровой набор PLAY-DOH (Плэй-До) для ребенка, стремящегося к творчеству и проявляющего желание попробовать себя в художественной лепке из пластилина.. . Комплект состоит из пяти стандартных контейнеров с массой для лепки, а также большое количество различных аксессуаров для «выпекания» аппетитных кондитерских шедевров. В упаковке Вы найдете – миниатюрную скалку для раскатывания «теста», игрушечный противень для выпечки, различные формы для лепки фигурного печенья, кухонная лопатка, а также специальный инструмент, с помощью которого ребенок сможет украшать готовые изделия так, как подскажет ему фантазия.', 'more': 'Бренд : PLAY-DOH. Артикул : B0307. Размер упаковки: 0.23 х 0.07 х 0.23 м. Вес : 0.625 кг', 'img': 'http://m.toy.ru/upload/resize_cache/iblock/22b/873_540_10240811ca8906714d1a9f41f2f5b358d/6db103b0_6130_11e5_a105_00155d093116.jpeg'},
 ]
 
 def add(request):
+	
     return HttpResponse("Добавлено")
 
 def home(request):
-    """
-    Home page with auth links.
-    """
     if request.user.is_authenticated():
-        return HttpResponse("{0} <a href='/accounts/logout'>exit</a>".format(request.user))
+    	x = True
     else:
-        return HttpResponse("<a href='/login/vk-oauth2/'>login with VK</a>")
+    	x = False
+    return render(request, "home.html", {'x': x})
 
 @login_required
 def account_profile(request):
-    """
-    Show user greetings. ONly for logged in users.
-    """
-    return HttpResponse("Hi, {0}! Nice to meet you.".format(request.user.first_name))
+    return render(request, "greeting.html")
 
 
 def account_logout(request):
@@ -48,6 +45,37 @@ def account_logout(request):
     """
     logout(request)
     return redirect('/') 
+
+
+@csrf_exempt
+def paypal_success(request):
+    """
+    Tell user we got the payment.
+    """
+    return HttpResponse("Money is mine. Thanks.")
+
+
+@login_required
+def paypal_pay(request):
+    """
+    Page where we ask user to pay with paypal.
+    """
+    paypal_dict = {
+        "business": "acccko-facilitator@gmail.com",
+        "amount": "100.00",
+        "currency_code": "RUB",
+        "item_name": "products in socshop",
+        "invoice": "INV-00001",
+        "notify_url": reverse('paypal-ipn'),
+        "return_url": "http://localhost:8000/payment/success/",
+        "cancel_return": "http://localhost:8000/payment/cart/",
+        "custom": str(request.user.id)
+    }
+
+    # Create the instance.
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form, "paypal_dict": paypal_dict}
+    return render(request, "payment.html", context)
 
 def start(request):
     return render(request, "index.html")
@@ -84,50 +112,7 @@ def games(request):
 def cart(request):
 	return render(request, "cart.html")
 
-def toy1(request):
-	item = all_items[0]
-	return render(request, "toy.html", {'item': item})
-
-def toy2(request):
-	item = all_items[1]
-	return render(request, "toy.html", {'item': item})
-
-def toy3(request):
-	item = all_items[2]
-	return render(request, "toy.html", {'item': item})
-
-def toy4(request):
-	item = all_items[3]
-	return render(request, "toy.html", {'item': item})
-
-def toy5(request):
-	item = all_items[4]
-	return render(request, "toy.html", {'item': item})
-
-def toy6(request):
-	item = all_items[5]
-	return render(request, "toy.html", {'item': item})
-
-def toy7(request):
-	item = all_items[6]
-	return render(request, "toy.html", {'item': item})
-
-def toy8(request):
-	item = all_items[7]
-	return render(request, "toy.html", {'item': item})
-
-def toy9(request):
-	item = all_items[8]
-	return render(request, "toy.html", {'item': item})
-
-def toy10(request):
-	item = all_items[9]
-	return render(request, "toy.html", {'item': item})
-
-def toy11(request):
-	item = all_items[10]
-	return render(request, "toy.html", {'item': item})
-
-def toy12(request):
-	item = all_items[11]
+def toy(request, number):
+	num = int(number)
+	item = all_items[num-1]
 	return render(request, "toy.html", {'item': item})

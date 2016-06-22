@@ -5,17 +5,17 @@
 				<div class="col-md-12" class="shoplist">
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Главная</a> <span class="divider">/</span>
+							<a href="/">Главная</a> <span class="divider">/</span>
 						</li>
 						<li>
-							<a href="#">Каталог</a> <span class="divider">/</span>
+							<a href="/catalog">Каталог</a> <span class="divider">/</span>
 						</li>
 						<li class="active">
 							Развивающие игры и хобби
 						</li>
 					</ul>
 						{% for item in items_list %}
-						<a href="#"><div class="col-md-4" id="imglist">
+						<a href="/{{item.id}}"><div class="col-md-4" id="imglist">
 							<img class="imgcat" src="{{ item.img }}" />
 							<dl>
 								<dd>

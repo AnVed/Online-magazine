@@ -5,24 +5,39 @@
 				<div class="col-md-12" class="shoplist">
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Главная</a> <span class="divider">/</span>
+							<a href="/">Главная</a> <span class="divider">/</span>
 						</li>
 						<li>
-							<a href="#">Каталог</a> <span class="divider">/</span>
+							<a href="/catalog">Каталог</a> <span class="divider">/</span>
 						</li>
 						<li class="active">
 							Мягкие игрушки
 						</li>
 					</ul>
 						{% for item in items_list %}
-						<a href="#"><div class="col-md-4" id="imglist">
+						<a href="/{{item.id}}"><div class="col-md-4" id="imglist">
 							<img class="imgcat" src="{{ item.img }}" />
 							<dl>
 								<dd>
 									{{ item.title }}
 								</dd>
 								<dt>
-									{{ item.price }}P <button id="item{{ item.id }}" class="add"><img class="cart_add" src="http://cs604529.vk.me/v604529635/1d0b/MStjkg_iHqI.jpg"></button>
+									{{ item.price }}P <button id="item{{ item.id }}" class="add">
+									<script>
+									$(document).ready(function(){
+  									$( "button.add" ).click(function(){
+   									 var current_button = $(this);
+    								$.ajax({
+        							url: "/add-to-cart/",
+       								 type: "GET",
+        							data: {"item": $(this).attr('id')},
+        							success: function(data){
+          							current_button.replaceWith( data );
+        							}
+    								});
+   									});
+									});
+								</script>В корзину</button>
 								</dt>
 							</dl>
 						</div></a>
@@ -30,19 +45,3 @@
 				</div>
 			</div>
 	{% endblock %}
-
-	<script>
-$(document).ready(function(){
-  $( "button.add" ).click(function(){
-    var current_button = $(this);
-    $.ajax({
-        url: "/add-to-cart/",
-        type: "GET",
-        data: {"item": $(this).attr('id')},
-        success: function(data){
-          current_button.replaceWith( data );
-        }
-    });
-   });
-});
-</script>
