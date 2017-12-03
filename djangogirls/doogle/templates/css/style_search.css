@@ -1,0 +1,65 @@
+body {
+
+	background-color: #ece5d5;
+	background-image: url(https://4.downloader.disk.yandex.ru/disk/467711820644052c79c201b1b6f4151c3ed8e58f5ecc6998891986e07e253c7e/5a2220e9/AEjhBv4oZhtJmxRO6eEIMDKxftqz18Cv_tNGKPwvVbG_3Wyr4lNJ6zADPKhBUABwYr7ZgmQ1zVCCplECXTw_Iw%3D%3D?uid=423459758&filename=240_F_84556601_W71hd1xmCxZUhsscyNlokY1an7Kqx6ZJ.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&fsize=6373&hid=e7bb1f2ee2341af23a466b862ff71262&media_type=image&tknv=v2&etag=570757884046bf9fb65812011e115a48);
+}
+
+.logo_line {
+	margin-top: 0%;
+	background-color: #ece5d5;
+	width: 100%;
+}
+
+.logo {
+	width: 200px;
+}
+
+#nav {
+	background-color: #ece5d5;
+}
+
+#search {
+	border-radius: 0px 0px 0;
+	margin-top: 30px;
+}
+
+#main {
+	background-color: #fff;
+	padding: 10px;
+}
+
+#under_top {
+	margin-top: 120px;
+}
+
+
+iframe {
+	margin-top: 10px;
+}
+
+.btn-group {
+	box-shadow: 0;
+	text-decoration: none;
+
+	outline: none;
+}
+
+#elements {
+	height: 28px;
+	margin-bottom: 2px;
+	background-color: white;
+	color: grey;
+	border-radius: 0px;
+	line-height: 8px;
+	outline: none;
+}
+
+#metro_select {
+	height: 28px;
+	background-color: white;
+	text-align: center;
+	color: grey;
+	border: 1px solid #ccc;
+	outline: none;
+}
+
